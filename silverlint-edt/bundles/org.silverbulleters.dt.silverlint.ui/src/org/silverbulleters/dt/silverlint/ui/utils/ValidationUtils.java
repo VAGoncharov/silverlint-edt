@@ -1,8 +1,9 @@
 /**
- * Copyright (C) 2022, SilverBulleters LLC
+ * Copyright (C) 2023, SilverBulleters LLC
  */
 package org.silverbulleters.dt.silverlint.ui.utils;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.sonarsource.sonarlint.core.client.api.common.analysis.Issue;
@@ -35,11 +36,11 @@ public final class ValidationUtils {
 		var type = issue.getType();
 		var ruleKey = issue.getRuleKey();
 		if (type.equals("BUG") || type.equals("VULNERABILITY")) {
-			messageAcceptor.acceptError(message, module, offsetParams[0], offsetParams[1], ruleKey);
+			messageAcceptor.acceptError(message, (EObject)module, offsetParams[0], offsetParams[1], ruleKey);
 		} else if (type.equals("SECURITY_HOTSPOT") || type.equals("CODE_SMELL")) {
-			messageAcceptor.acceptWarning(message, module, offsetParams[0], offsetParams[1], ruleKey);
+			messageAcceptor.acceptWarning(message, (EObject)module, offsetParams[0], offsetParams[1], ruleKey);
 		} else {
-			messageAcceptor.acceptInfo(message, module, offsetParams[0], offsetParams[1], ruleKey);
+			messageAcceptor.acceptInfo(message, (EObject)module, offsetParams[0], offsetParams[1], ruleKey);
 		}
 
 	}
